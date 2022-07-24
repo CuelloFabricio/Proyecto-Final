@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito</title>
+    <link rel="stylesheet" href="/CSS/Carrito.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inder&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="MainCarrito">
+        <div class="Encabezado">
+            <a th:href="@{/}"><img src="/IMG/ImgLogo.png" class="ImgLogo"></img></a>
+            <a th:href="@{/}"><img src="/IMG/ImgLogo.png" class="ImgLogo1"></img></a>
+            <a th:href="@{/perfil}"><input type="image" src="/IMG/BotonIMGPerfil.png" class="BotonIMGPerfil"></a>
+            <span class="TextProducto">Producto</span>
+            <span class="TextPrecioPorUnidad">Precio por unidad</span>
+            <span class="TextCantidad">Cantidad</span>
+            <span class="TextSubtotal">Subtotal</span>
+            <div class="Rectangulo1"></div>
+        </div>
+        <div class="divListaProductos">
+            <!--Contenedor Producto-->
+            <form action="">
+                <div th:each="producto : ${carro.productos}">
+                    <div class="DivProductoCarrito">
+                        <img src="/IMG/ImgProducto.png" class="ImgProducto">
+                        <span class="NombreProducto" th:text="${producto.nombre}"></span>
+                        <span id="precioProducto" class="NroPrecioUnidad precio" th:text="${producto.precio}"></span>
+                        <span class="signoPrecioUnidad">$</span>
+                        <span id="unidadesProducto" class="NroCantidad unidades" th:text="${producto.unidades}"></span>
+                        <span id="subtotalProducto" class="NroSubtotalUnidad subtotal"
+                            th:text="${producto.precio}"></span>
+                        <span class="signoSubtotalUnidad">$</span>
+                        <a th:href="@{/sacarUno/__{producto.id}__}"><input type="image" src="/IMG/BotonImgEliminar.png"
+                                class="BotonImgEliminar"></a>
+                        <input id="restarBoton" type="image" src="/IMG/ImgMenos.png" class="ImgMenos sacar">
+                        <input id="sumarBoton" type="image" src="/IMG/ImgMas.png" class="ImgMas agregar">
+                        <div class="RectanguloProducto"></div>
+                        <input type="hidden" name="idProducto" th:value="${producto.id}">
+                    </div>
+                    <div id="forms">
+                    </div>
+                </div>
+            </form>
+
+            <!--Contenedor Total Productos-->
+            <div class="DivTotal">
+                <p class="TextSubtotal2">Subtotal</p>
+                <p class="NroSubtotal">$ <span id="subtotalid"></span></p>
+                <p class="TextTotal">Total</p>
+                <p class="NroTotal">$<span id="totalid"></span></p>
+                <input type="image" src="/IMG/ImgComprar.png" class="ImgComprar">
+            </div>
+        </div>
+    </div>
+    <script src="/JS/Carrito.js"></script>
+</body>
+
+</html>
